@@ -20,13 +20,13 @@
 
 /* _____________ Your Code Here _____________ */
 
-type MyParameters<T extends (...args: any[]) => any> = any
+type MyParameters<T extends (...args: any[]) => any> = T extends (...args: infer P) => any ? P : never
 
 /* _____________ Test Cases _____________ */
 import type { Equal, Expect } from '@type-challenges/utils'
 
-function foo(arg1: string, arg2: number): void {}
-function bar(arg1: boolean, arg2: { a: 'A' }): void {}
+function foo(_: string, __: number): void {}
+function bar(_: boolean, __: { a: 'A' }): void {}
 function baz(): void {}
 
 type cases = [
