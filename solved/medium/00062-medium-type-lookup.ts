@@ -29,7 +29,9 @@
 
 /* _____________ Your Code Here _____________ */
 
-type LookUp<U, T> = any
+type LookUp<U extends Animal, T extends Animal['type']> = {
+  [UKey in keyof U]: U[UKey] extends T ? U : never
+}['type']
 
 /* _____________ Test Cases _____________ */
 import type { Equal, Expect } from '@type-challenges/utils'
