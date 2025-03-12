@@ -24,7 +24,13 @@
 
 /* _____________ Your Code Here _____________ */
 
-type Last<T extends any[]> = any
+type Last<T extends any[]> = ['temp', ...T] extends infer TNewArray
+  ? TNewArray extends ['temp']
+    ? never
+    : TNewArray extends any[]
+      ? TNewArray[T['length']]
+      : never
+  : never
 
 /* _____________ Test Cases _____________ */
 import type { Equal, Expect } from '@type-challenges/utils'
