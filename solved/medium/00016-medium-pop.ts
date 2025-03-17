@@ -26,7 +26,24 @@
 
 /* _____________ Your Code Here _____________ */
 
-type Pop<T extends any[]> = any
+// I was cringe but i was free
+
+// type Pop<T extends any[]> = ['fake-element', ...T][T['length']] extends infer TLast ? Exclude<T[number], TLast> : never
+// type Pop<T extends any[]> = ['fake-element', ...T] extends infer TArrayWithFakeFirst
+//   ? {
+//       [Key in keyof TArrayWithFakeFirst]: Key extends `${T['length']}`
+//         ? never
+//         : TArrayWithFakeFirst[Key] extends 'fake-element'
+//           ? never
+//           : TArrayWithFakeFirst[Key];
+//     } extends infer TArrayWithNever ? TArrayWithNever : never
+//   : never
+
+type Pop<T extends any[]> = 0 extends T['length']
+  ? []
+  : T extends [...infer First, infer Last]
+    ? First
+    : never
 
 /* _____________ Test Cases _____________ */
 import type { Equal, Expect } from '@type-challenges/utils'

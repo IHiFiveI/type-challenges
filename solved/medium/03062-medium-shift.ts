@@ -18,7 +18,11 @@
 
 /* _____________ Your Code Here _____________ */
 
-type Shift<T> = any
+type Shift<T extends any[]> = 0 extends T['length']
+  ? []
+  : T extends [infer First, ...infer Rest]
+    ? Rest
+    : never
 
 /* _____________ Test Cases _____________ */
 import type { Equal, Expect } from '@type-challenges/utils'
